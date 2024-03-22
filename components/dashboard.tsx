@@ -1,23 +1,41 @@
 'use client';
 
+import { callReplicate } from '@/server/actions/replicate';
 import { useState } from 'react';
 import Output from './output';
 import Sidebar from './sidebar';
 
 function Dashboard() {
-	const [prompt, setPrompt] = useState('');
-	const [width, setWidth] = useState(0);
-	const [height, setHeight] = useState(0);
-	const [outputNumber, setOutputNumber] = useState(0);
-	const [guidence, setGuidence] = useState(0);
-	const [steps, setSteps] = useState(0);
+	const [prompt, setPrompt] = useState('Eowyn, lord of the rings, riding horse');
+	const [width, setWidth] = useState(504);
+	const [height, setHeight] = useState(600);
+	const [outputNumber, setOutputNumber] = useState(1);
+	const [guidence, setGuidence] = useState(1.77);
+	const [steps, setSteps] = useState(5);
+	const [outputImage, setOutputImage] = useState('');
 
-	console.log(prompt, width, height, outputNumber, guidence, steps);
+	function handleReplicate() {
+		callReplicate({
+			width,
+			height,
+			prompt,
+			guidence,
+			steps,
+		}).then(output => {
+			if (output?.output) {
+				setOutputImage(output.output.toString());
+			}
+		});
+	}
 
 	return (
 		<div className='mb-10 grid grid-cols-3 gap-6'>
 			<div className='col-span-1'>
 				<Sidebar
+					prompt={prompt}
+					width={width}
+					height={height}
+					outputNumber={outputNumber}
 					setPrompt={setPrompt}
 					setWidth={setWidth}
 					setHeight={setHeight}
@@ -29,7 +47,10 @@ function Dashboard() {
 				/>
 			</div>
 			<div className='col-span-2'>
-				<Output />
+				<Output
+					outputImage={outputImage}
+					handleReplicate={handleReplicate}
+				/>
 			</div>
 		</div>
 	);

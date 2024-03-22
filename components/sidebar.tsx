@@ -3,9 +3,13 @@ import ModifyOutput from './modifyOutput';
 import SelectGenerator from './selectGenerator';
 
 interface SidebarProps {
+	prompt: string;
 	setPrompt: (prompt: string) => void;
+	width: number;
 	setWidth: (width: number) => void;
+	height: number;
 	setHeight: (height: number) => void;
+	outputNumber: number;
 	setOutputNumber: (outputNumber: number) => void;
 	guidence: number;
 	setGuidence: (guidence: number) => void;
@@ -14,6 +18,10 @@ interface SidebarProps {
 }
 
 function Sidebar({
+	prompt,
+	width,
+	height,
+	outputNumber,
 	setPrompt,
 	setWidth,
 	setHeight,
@@ -27,10 +35,16 @@ function Sidebar({
 		<>
 			<SelectGenerator />
 			<div className='mt-4'>
-				<EnterPrompt setPrompt={setPrompt} />
+				<EnterPrompt
+					prompt={prompt}
+					setPrompt={setPrompt}
+				/>
 			</div>
 			<div className='mt-4'>
 				<ModifyOutput
+					width={width}
+					height={height}
+					outputNumber={outputNumber}
 					setWidth={setWidth}
 					setHeight={setHeight}
 					setOutputNumber={setOutputNumber}

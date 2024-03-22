@@ -5,6 +5,9 @@ import { Slider } from '@/components/ui/slider';
 import { Button } from './ui/button';
 
 function ModifyOutput({
+	width,
+	height,
+	outputNumber,
 	setWidth,
 	setHeight,
 	setOutputNumber,
@@ -13,6 +16,9 @@ function ModifyOutput({
 	steps,
 	setSteps,
 }: {
+	width: number;
+	height: number;
+	outputNumber: number;
 	setWidth: (width: number) => void;
 	setHeight: (height: number) => void;
 	setOutputNumber: (outputNumber: number) => void;
@@ -35,12 +41,14 @@ function ModifyOutput({
 				<p className='text-clr-gray'>Output Dimensions</p>
 				<div className='flex gap-4 mt-4'>
 					<Input
+						value={width}
 						type='number'
 						className='bg-clr-bg-secondary rounded-2xl'
 						placeholder='Width'
 						onChange={e => setWidth(parseInt(e.target.value))}
 					/>
 					<Input
+						value={height}
 						type='number'
 						className='bg-clr-bg-secondary rounded-2xl'
 						placeholder='Height'
@@ -63,6 +71,7 @@ function ModifyOutput({
 					</Button>
 					<Button
 						onClick={() => setOutputNumber(3)}
+						autoFocus
 						className='flex-1 text-white hover:bg-accent hover:text-clr-darkest bg-clr-bg-secondary focus:bg-accent focus:text-clr-darkest'>
 						3
 					</Button>
