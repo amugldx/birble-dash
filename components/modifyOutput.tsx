@@ -2,19 +2,31 @@
 
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
-import { useState } from 'react';
 import { Button } from './ui/button';
 
-function ModifyOutput() {
-	const [stepsValue, setStepsValue] = useState(0);
-	const [guidenceValue, setGuidenceValue] = useState(0);
-
+function ModifyOutput({
+	setWidth,
+	setHeight,
+	setOutputNumber,
+	guidence,
+	setGuidence,
+	steps,
+	setSteps,
+}: {
+	setWidth: (width: number) => void;
+	setHeight: (height: number) => void;
+	setOutputNumber: (outputNumber: number) => void;
+	guidence: number;
+	setGuidence: (guidence: number) => void;
+	steps: number;
+	setSteps: (steps: number) => void;
+}) {
 	const handleStepsChange = (newValue: number) => {
-		setStepsValue(newValue);
+		setSteps(newValue);
 	};
 
 	const handleGuidenceChange = (newValue: number) => {
-		setGuidenceValue(newValue);
+		setGuidence(newValue);
 	};
 	return (
 		<div className='bg-clr-bg-secondary p-6 rounded-2xl'>
@@ -26,27 +38,37 @@ function ModifyOutput() {
 						type='number'
 						className='bg-clr-bg-secondary rounded-2xl'
 						placeholder='Width'
+						onChange={e => setWidth(parseInt(e.target.value))}
 					/>
 					<Input
 						type='number'
 						className='bg-clr-bg-secondary rounded-2xl'
 						placeholder='Height'
+						onChange={e => setHeight(parseInt(e.target.value))}
 					/>
 				</div>
 			</div>
 			<div className='bg-background mt-4 rounded-2xl p-4'>
 				<p className='text-clr-gray'>Number of Outputs</p>
 				<div className='flex gap-4 mt-4 w-full'>
-					<Button className='flex-1 text-white hover:bg-accent hover:text-clr-darkest bg-clr-bg-secondary focus:bg-accent focus:text-clr-darkest'>
+					<Button
+						onClick={() => setOutputNumber(1)}
+						className='flex-1 text-white hover:bg-accent hover:text-clr-darkest bg-clr-bg-secondary focus:bg-accent focus:text-clr-darkest'>
 						1
 					</Button>
-					<Button className='flex-1 text-white hover:bg-accent hover:text-clr-darkest bg-clr-bg-secondary focus:bg-accent focus:text-clr-darkest'>
+					<Button
+						onClick={() => setOutputNumber(2)}
+						className='flex-1 text-white hover:bg-accent hover:text-clr-darkest bg-clr-bg-secondary focus:bg-accent focus:text-clr-darkest'>
 						2
 					</Button>
-					<Button className='flex-1 text-white hover:bg-accent hover:text-clr-darkest bg-clr-bg-secondary focus:bg-accent focus:text-clr-darkest'>
+					<Button
+						onClick={() => setOutputNumber(3)}
+						className='flex-1 text-white hover:bg-accent hover:text-clr-darkest bg-clr-bg-secondary focus:bg-accent focus:text-clr-darkest'>
 						3
 					</Button>
-					<Button className='flex-1 text-white hover:bg-accent hover:text-clr-darkest bg-clr-bg-secondary focus:bg-accent focus:text-clr-darkest'>
+					<Button
+						onClick={() => setOutputNumber(4)}
+						className='flex-1 text-white hover:bg-accent hover:text-clr-darkest bg-clr-bg-secondary focus:bg-accent focus:text-clr-darkest'>
 						4
 					</Button>
 				</div>
@@ -54,8 +76,8 @@ function ModifyOutput() {
 			<div className='bg-background mt-4 rounded-2xl p-4'>
 				<p className='text-clr-gray flex justify-between'>
 					Steps
-					<span className='h-8 w-10 bg-clr-bg-light text-white flex justify-center items-center rounded-xl '>
-						{stepsValue}
+					<span className='h-8 w-16 bg-clr-bg-light text-white flex justify-center items-center rounded-xl '>
+						{steps}
 					</span>
 				</p>
 				<div className='mt-4 flex gap-2'>
@@ -63,7 +85,7 @@ function ModifyOutput() {
 						0
 					</div>
 					<Slider
-						defaultValue={[stepsValue]}
+						defaultValue={[steps]}
 						onValueChange={handleStepsChange}
 						max={10}
 						step={1}
@@ -76,8 +98,8 @@ function ModifyOutput() {
 			<div className='bg-background mt-4 rounded-2xl p-4'>
 				<p className='text-clr-gray flex justify-between'>
 					Guidance Scale
-					<span className='h-8 w-10 bg-clr-bg-light text-white flex justify-center items-center rounded-xl '>
-						{guidenceValue}
+					<span className='h-8 w-16 bg-clr-bg-light text-white flex justify-center items-center rounded-xl '>
+						{guidence}
 					</span>
 				</p>
 				<div className='mt-4 flex gap-2'>
@@ -85,13 +107,13 @@ function ModifyOutput() {
 						0
 					</div>
 					<Slider
-						defaultValue={[guidenceValue]}
+						defaultValue={[guidence]}
 						onValueChange={handleGuidenceChange}
-						max={50}
-						step={1}
+						max={3}
+						step={0.01}
 					/>
 					<div className='w-12 h-8 flex justify-center items-center bg-clr-bg-secondary rounded-xl'>
-						50
+						3
 					</div>
 				</div>
 			</div>

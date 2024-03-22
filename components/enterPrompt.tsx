@@ -1,6 +1,6 @@
 import { Textarea } from '@/components/ui/textarea';
 
-function EnterPrompt() {
+function EnterPrompt({ setPrompt }: { setPrompt: (prompt: string) => void }) {
 	return (
 		<div className='bg-clr-bg-secondary p-6 rounded-2xl'>
 			<h3 className='mb-6 flex justify-between'>
@@ -9,6 +9,7 @@ function EnterPrompt() {
 			<Textarea
 				className='w-full rounded-2xl p-4'
 				placeholder='Type your message here.'
+				onChange={e => setPrompt(e.target.value)}
 			/>
 		</div>
 	);
