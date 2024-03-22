@@ -27,12 +27,12 @@ function ModifyOutput({
 	steps: number;
 	setSteps: (steps: number) => void;
 }) {
-	const handleStepsChange = (newValue: number) => {
-		setSteps(newValue);
+	const handleStepsChange = (newValue: number[]) => {
+		setSteps(newValue[0]);
 	};
 
-	const handleGuidenceChange = (newValue: number) => {
-		setGuidence(newValue);
+	const handleGuidenceChange = (newValue: number[]) => {
+		setGuidence(newValue[0]);
 	};
 	return (
 		<div className='bg-clr-bg-secondary p-6 rounded-2xl'>
