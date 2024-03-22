@@ -1,10 +1,17 @@
-import { Button } from '@/components/ui/button';
+import Dashboard from '@/components/dashboard';
+import Header from '@/components/header';
 
 export default function Home() {
 	return (
 		<>
-			<h1>Hello</h1>
-			<Button variant='outline'>Hello</Button>
+			<div className='min-h-svh px-16'>
+				<div className='mt-16'>
+					<Header />
+				</div>
+				<div className='mt-16'>
+					<Dashboard />
+				</div>
+			</div>
 		</>
 	);
 }
